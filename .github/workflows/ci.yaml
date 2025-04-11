@@ -10,7 +10,6 @@ permissions: write-all
 
 jobs:
   build:
-    needs: [setup]
     runs-on: ubuntu-latest
     outputs:
       release: ${{ steps.release.outputs.release }}
@@ -39,7 +38,7 @@ jobs:
         run: poetry build && poetry run python -m unittest
 
       - name: Publish release to test PyPI
-        if: gitub.ref != 'refs/heads/main'
+        if: github.ref != 'refs/heads/main'
         run: |
           poetry config repositories.test-pypi https://test.pypi.org/legacy/
           poetry config pypi-token.test-pypi ${{ secrets.TEST_PYPI_TOKEN }}
