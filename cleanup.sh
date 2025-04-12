@@ -13,7 +13,7 @@ sed -i "s/ablil/$AUTHOR/g" pyproject.toml LICENSE .github/CODEOWNERS
 sed -i "s/^version.*/version = \"0.0.1\"/g" pyproject.toml
 
 # rename packages
-mv python_starter_template "$REPOSITORY_UNDERSCORE"
+mv python_package_starter "$REPOSITORY_UNDERSCORE"
 sed -i "s/python_package_starter/$REPOSITORY_UNDERSCORE/g" tests/*.py
 
 # cleanup
