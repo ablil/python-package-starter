@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-python@v5.4.0
 
       - name: Install dependencies
-        run: pipx install poetry && poetry install
+        run: pipx install poetry==1.8.4 && poetry install
 
       - name: Update version (pull requests only)
         if: github.ref != 'refs/heads/main'

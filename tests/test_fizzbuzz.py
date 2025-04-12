@@ -1,7 +1,7 @@
 
 import unittest
 
-from ablil.fizzbugzz import fizzbuzz
+from python_starter_template.fizzbugzz import fizzbuzz
 
 
 class FizzBuzzTests(unittest.TestCase):

@@ -1,12 +1,9 @@
 [tool.poetry]
-name = "ablil"
+name = "python-starter-template"
 version = "1.2.0"
 description = "python-starter-template"
 authors = ["ablil"]
 readme = "README.md"
-
-[project]
-license-files = ["LICENSE"]
 
 [project.urls]
 Repository = "https://github.com/ablil/python-starter-template"
