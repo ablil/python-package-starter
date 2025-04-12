@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-starter-template"
-version = "2.0.0"
+version = "2.0.1"
 description = "python-starter-template"
 authors = ["ablil"]
 readme = "README.md"
