@@ -4,6 +4,8 @@ version = "1.2.0"
 description = "python-starter-template"
 authors = ["ablil"]
 readme = "README.md"
+
+[project]
 license-files = ["LICENSE"]
 
 [project.urls]
