@@ -22,7 +22,7 @@ jobs:
 
       - name: Update version (pull requests only)
         if: github.ref != 'refs/heads/main'
-        run: poetry version "$(poetry version -s)$(date +%s)"
+        run: poetry version "$(poetry version -s).dev$(date +%s)"
 
       - name: Build and test
         run: poetry build && poetry run python -m unittest
