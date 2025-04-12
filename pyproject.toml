@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-package-starter"
-version = "0.0.1"
+version = "2.0.2"
 description = "python-package-starter"
 authors = ["ablil"]
 readme = "README.md"
