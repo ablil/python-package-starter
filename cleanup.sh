@@ -10,6 +10,7 @@ sed -i "s/python-starter-template/$REPOSITORY/g" README.md pyproject.toml
 sed -i "s/ablil/$AUTHOR/g" pyproject.toml LICENSE
 sed -i "s/^version.*/version = \"0.0.1\"/g" pyproject.toml
 
+rm -f .github/workflows/cleanup.yaml
 rm -f cleanup.sh
 
 git add .

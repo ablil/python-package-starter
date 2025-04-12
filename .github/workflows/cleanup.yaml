@@ -17,5 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
       - run: bash cleanup.sh ${{ github.actor }} $(basename ${{ github.repository }})
         shell: bash
+        name: run cleanup script
