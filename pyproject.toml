@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ablil"
-version = "1.0.0"
+version = "1.2.0"
 description = "Python package starter with Poetry"
 authors = ["ablil <ablil@protonmail.com>"]
 readme = "README.md"
