@@ -1,0 +1,25 @@
+name: release
+
+on:
+  push:
+    tag:
+      - v*
+
+permissions: write-all
+
+jobs:
+  release:
+    runs-on: ubuntu-latst
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5.4.0
+      - run: pipx install poetry && poetry install
+      - run: poetry build && poetry run python -m unittest
+
+      - name: Publish release to PyPi
+        run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }} &&  poetry publish
+
+      - name: Create Github release
+        run: gh release create ${{ github.ref_name }} --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

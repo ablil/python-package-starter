@@ -9,107 +9,26 @@ on:
 permissions: write-all
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      release: ${{ steps.release.outputs.current }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Get current relase version
-        id: release
-        run: |
-          git checkout main
-          echo current=$(git tag -l "v*" --sort=creatordate | head -1) >> $GITHUB_OUTPUT
-
   build:
-    needs: [setup]
     runs-on: ubuntu-latest
-    outputs:
-      release: ${{ steps.release.outputs.release }}
     steps:
       - uses: actions/checkout@v4
+
       - name: setup python
         uses: actions/setup-python@v5.4.0
+
       - name: Install dependencies
         run: pipx install poetry && poetry install
 
-      - name: Update pyproject.toml with current version
-        run: VERSION=${{ needs.setup.outputs.release }} poetry version ${VERSION/v/}
-
-      - name: bump version
-        id: release
-        run: |
-          if [[ ${{ github.ref }} == 'refs/heads/main' ]]; then
-            poetry version minor
-          else
-            VERSION=$(poetry version -s | cut -d. -f1,2) 
-            poetry version "${VERSION}.dev$(date +%s)"
-          fi
-
-          echo release=$(poetry version -s) >> $GITHUB_OUTPUT
+      - name: Update version (pull requests only)
+        if: github.ref != 'refs/heads/main'
+        run: poetry version "$(poetry version -s)$(date +%s)"
 
       - name: Build and test
         run: poetry build && poetry run python -m unittest
-
-      - name: save artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: artifact
-          path: |
-            dist
-            README.md
-            pyproject.toml
-
-  publish-test-pypi:
-    needs: [build]
-    runs-on: ubuntu-latest
-    environment:
-      name: Test PyPI
-      url: https://test.pypi.org/project/ablil/${{ needs.build.outputs.release }}
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: artifact
-          path: ${{ github.workspace }}
-      - name: setup python
-        uses: actions/setup-python@v5.4.0
-      - run: pip install poetry
 
       - name: Publish release to test PyPI
         run: |
           poetry config repositories.test-pypi https://test.pypi.org/legacy/
           poetry config pypi-token.test-pypi ${{ secrets.TEST_PYPI_TOKEN }}
           poetry publish -r test-pypi
-
-  publish-pypi:
-    if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [publish-test-pypi, build]
-    runs-on: ubuntu-latest
-    environment:
-      name: PyPI
-      url: https://pypi.org/project/ablil/${{ needs.build.outptus.release }}
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: artifact
-          path: ${{ github.workspace }}
-      - name: setup python
-        uses: actions/setup-python@v5.4.0
-      - run: pip install poetry
-
-      - name: Publish release to PyPi
-        run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }} &&  poetry publish
-
-  release:
-    needs: [publish-test-pypi, publish-pypi, build]
-    runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ github.token }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: tag current commit
-        run: git tag "v${{ needs.build.outputs.release }}" && git push --tags
-      - name: create release
-        run: gh release create "v${{ needs.build.outputs.release }}" --generate-notes
