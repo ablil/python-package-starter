@@ -1,7 +1,7 @@
 
 import unittest
 
-from python_starter_template.fizzbugzz import fizzbuzz
+from python_package_starter.fizzbugzz import fizzbuzz
 
 
 class FizzBuzzTests(unittest.TestCase):
