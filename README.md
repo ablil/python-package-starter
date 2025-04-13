@@ -2,11 +2,6 @@
 
 [![CI](https://github.com/ablil/python-package-starter/actions/workflows/ci.yaml/badge.svg?event=push)](https://github.com/ablil/python-package-starter/actions/workflows/ci.yaml)
 
-This is a ready to use starter for Python packages, clone it and make sure to update:
-
-* pyproject.toml
-* README.md
-
 ## Develop locally
 
 Start a new virtual env
@@ -39,19 +34,16 @@ poetry add pytest --group test
 
 ## Build and publish
 
-Build package
-```shell
-poetry build
-```
-
 Publish package
 ```shell
-poetry publish
+> poetry publish --build -r testpypi
+> poetry publish --build
 ```
 
 Authenticate to PyPI
 ```shell
-poetry config pypi-token.pypi $PYPI_TOKEN
+> poetry config pypi-token.testpypi $PYPI_TOKEN_TEST
+> poetry config pypi-token.pypi $PYPI_TOKEN
 ```
 
 
