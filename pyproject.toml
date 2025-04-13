@@ -6,10 +6,6 @@ authors = ["ablil <ablil@proton.me>"]
 maintainers = ["ablil <ablil@proton.me>"]
 readme = "README.md"
 repository = "https://github.com/ablil/python-package-starter"
-keywords = []
-
-[project]
-license = { file = "LICENSE" }
 
 [project.urls]
 "Bug Tracker" = "https://github.com/ablil/python-package-starter/issues"
