@@ -2,11 +2,12 @@
 name = "python-package-starter"
 version = "2.0.2"
 description = "python-package-starter"
-authors = ["ablil"]
+authors = ["ablil <ablil@proton.me>"]
+maintainers = ["ablil <ablil@proton.me>"]
 readme = "README.md"
+repository = "https://github.com/ablil/python-package-starter"
 
 [project.urls]
-Repository = "https://github.com/ablil/python-package-starter"
 "Bug Tracker" = "https://github.com/ablil/python-package-starter/issues"
 
 [tool.poetry.dependencies]
