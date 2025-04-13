@@ -33,4 +33,4 @@ build-backend = "poetry.core.masonry.api"
 
 # see https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file
 [tool.black]
-line-length = 120
+line-length = 100
