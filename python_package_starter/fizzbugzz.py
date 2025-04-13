@@ -1,9 +1,9 @@
 def fizzbuzz(n):
     if n % 3 == 0 and n % 5 == 0:
-        return 'fizzbuzz'
+        return "fizzbuzz"
     elif n % 3 == 0:
-        return 'fizz'
+        return "fizz"
     elif n % 5 == 0:
-        return 'buzz'
+        return "buzz"
     else:
         return n
