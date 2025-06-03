@@ -22,7 +22,7 @@ pre-commit = ">=3.8,<5.0"
 
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.3.3"
+pytest = "^8.4.0"
 
 # see https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file
 [tool.black]
